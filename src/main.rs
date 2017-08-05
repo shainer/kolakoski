@@ -7,6 +7,10 @@ fn kolakoski(n: usize) -> Vec<u32> {
     // at to determine the length of the next run.
     let mut length_index : usize = 1;
 
+    // Keeps track of the length of the current run. Only really
+    // used at the beginning since we start in the middle of a run.
+    let mut current_length = 1;
+
     // Keeps track of the number for the last run.
     let mut last_num = 2;
 
@@ -21,14 +25,13 @@ fn kolakoski(n: usize) -> Vec<u32> {
     while sequence.len() < n {
         let expected_len = sequence[length_index];
 
-        // Push as much of the current number to fill this run.
-        for _ in 0..expected_len {
+        for _ in 0..(expected_len - current_length) {
             sequence.push(last_num);
         }
+        current_length = 0;
 
         length_index += 1;
 
-        // Next run must use the other number.
         match last_num {
             1 => last_num = 2,
             _ => last_num = 1
