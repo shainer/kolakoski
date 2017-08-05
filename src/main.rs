@@ -6,7 +6,11 @@ fn kolakoski(n: usize) -> Vec<u32> {
     let mut current_length = 1;
     let mut last_num = 2;
     sequence.push(1);
-    sequence.push(2);
+
+    // For n=1.
+    if n >= 2 {
+        sequence.push(2);
+    }
 
     while sequence.len() < n {
         let expected_len = sequence[length_index];
@@ -17,7 +21,6 @@ fn kolakoski(n: usize) -> Vec<u32> {
         current_length = 0;
 
         length_index += 1;
-        // TODO: match.
         last_num = if last_num == 1 { 2 } else { 1 };
     }
 
